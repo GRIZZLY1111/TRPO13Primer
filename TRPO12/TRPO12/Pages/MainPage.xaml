@@ -23,6 +23,7 @@
         <StackPanel Orientation="Horizontal">
             <Button Click="go_form">Добавить</Button>
             <Button Click="remove">Удалить</Button>
+            <Button Click="group">Группы</Button>
         </StackPanel>
         <ListView Grid.Row="1" ItemsSource="{Binding service.Students}"
                   MouseDoubleClick="Edit"
@@ -34,13 +35,18 @@
                             <TextBlock Text="{Binding LastName}"/>
                             <TextBlock Text="{Binding FirstName}"/>
                             <TextBlock Text="{Binding MiddleName}"/>
-                            <TextBlock Text="{Binding Birthday, StringFormat={}{0:dd.MM.yyyy}}"/>
+                            <TextBlock Text="{Binding Birthday, StringFormat={}{0:dd.MM.yyyy}}"/>  
                             <TextBlock>Паспорт</TextBlock>
                             <TextBlock>
-                                <Run Text="Серия: "/>
+                                <Run Text="Серия: "/>   
                                 <Run Text="{Binding Passport.Series}"/>
                                 <Run Text="Номер: "/>
                                 <Run Text="{Binding Passport.Number}"/>
+                            </TextBlock>
+                            <!-- Отображение группы в списке -->
+                            <TextBlock>
+                                <Run Text="Группа: "/>  
+                                <Run Text="{Binding Group.Title}"/>
                             </TextBlock>
                         </StackPanel>
                     </StackPanel>

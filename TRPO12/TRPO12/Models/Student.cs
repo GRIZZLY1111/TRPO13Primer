@@ -38,7 +38,6 @@ namespace TRPO12.Models
             get => _birthday;
             set => SetProperty(ref _birthday, value);
         }
-
         private Passport _passport;
         public Passport Passport
         {

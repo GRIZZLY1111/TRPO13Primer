@@ -12,38 +12,37 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TRPO12.Models;
 using TRPO12.Service;
 
 namespace TRPO12.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для StudentFormPage.xaml
+    /// Логика взаимодействия для GroupForm.xaml
     /// </summary>
-    public partial class StudentFormPage : Page
+    public partial class GroupForm : Page
     {
-        private StudentsService _service = new();
-        public Student _student = new();
-        bool isEdit = false;
-        public StudentFormPage(Student? _editStudent = null)
+        Models.Group _group = new();
+        GroupsService service = new();
+        bool IsEdit = false;
+        public GroupForm(Models.Group? group = null)
         {
             InitializeComponent();
-            if (_editStudent != null)
+            if (group != null)
             {
-                _student = _editStudent;
-                isEdit = true;
+                service.LoadRelation(group, "Students");
+                _group = group;
+                IsEdit = true;
             }
-            if (_student.Passport == null) //если сущности паспорта нет - создаем её
-                _student.Passport = new();
-            DataContext = _student;
+            DataContext = _group;
         }
+
         private void save(object sender, RoutedEventArgs e)
         {
-            if (isEdit)
-                _service.Commit();
+            if (IsEdit)
+                service.Commit();
             else
-                _service.Add(_student);
-            NavigationService.GoBack();
+                service.Add(_group);
+            back(sender, e);
         }
         private void back(object sender, RoutedEventArgs e)
         {

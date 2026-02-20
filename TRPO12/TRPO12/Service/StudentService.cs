@@ -27,16 +27,20 @@ namespace TRPO12.Service
                 MiddleName = student.MiddleName,
                 Birthday = student.Birthday,
                 Passport = student.Passport,
+                GroupId = student.GroupId,
+                Group = student.Group,
             };
             _db.Add<Student>(_student);
             Commit();
             Students.Add(_student);
         }
+
         public int Commit() => _db.SaveChanges();
         public void GetAll()
         {
             var students = _db.Students
             .Include(s => s.Passport)
+            .Include(s => s.Group)
             .ToList();
             Students.Clear();
             foreach (var student in students)
@@ -44,6 +48,7 @@ namespace TRPO12.Service
                 Students.Add(student);
             }
         }
+
         public void Remove(Student student)
         {
             _db.Remove<Student>(student);

@@ -35,6 +35,11 @@ namespace TRPO12.Pages
             NavigationService.Navigate(new StudentFormPage());
         }
 
+        private void group(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new GroupList());
+        }
+
         public void remove(object sender, EventArgs e)
         {
             if (student == null)
